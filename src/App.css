@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+.calculator-container h1 {
+  color: white;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  letter-spacing: -0.5px;
+}
+
+.main-section {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  overflow: hidden;
+  position: relative;
+  min-height: 500px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.input-content {
+  padding: 3rem;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.results-content {
+  padding: 3rem;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.main-section.show-inputs .input-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.main-section.show-results .input-content {
+  opacity: 0;
+  transform: translateX(-50px);
+  pointer-events: none;
+}
+
+.main-section.show-results .results-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.main-section.show-inputs .results-content {
+  opacity: 0;
+  transform: translateX(50px);
+  pointer-events: none;
+}
+
+.input-content h2 {
+  color: #2d3748;
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.results-content h2 {
+  color: #2d3748;
+  margin-bottom: 2rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.input-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.input-group label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: 500;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  color: #2d3748;
+  font-family: inherit;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  transform: translateY(-1px);
+}
+
+.input-group input::placeholder {
+  color: #a0aec0;
+}
+
+.calculate-btn,
+.reset-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1.25rem 3rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  font-family: inherit;
+}
+
+.calculate-btn:hover,
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.calculate-btn:active,
+.reset-btn:active {
+  transform: translateY(0);
+}
+
+.reset-btn {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  box-shadow: 0 4px 15px rgba(72, 187, 120, 0.4);
+  margin-top: 2rem;
+}
+
+.reset-btn:hover {
+  box-shadow: 0 8px 25px rgba(72, 187, 120, 0.6);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  border-left: 4px solid #667eea;
+  animation: slideUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  gap: 2rem;
+}
+
+.result-item:nth-child(1) { animation-delay: 0.1s; }
+.result-item:nth-child(2) { animation-delay: 0.2s; }
+.result-item:nth-child(3) { animation-delay: 0.3s; }
+.result-item:nth-child(4) { animation-delay: 0.4s; }
+.result-item:nth-child(5) { animation-delay: 0.5s; }
+.result-item:nth-child(6) { animation-delay: 0.6s; }
+.result-item:nth-child(7) { animation-delay: 0.7s; }
+.result-item:nth-child(8) { animation-delay: 0.8s; }
+.result-item:nth-child(9) { animation-delay: 0.9s; }
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.result-item.total-cost {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-left: none;
+  grid-column: 1 / -1;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.result-item.total-cost .result-label,
+.result-item.total-cost .result-value {
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.result-label {
+  font-weight: 500;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.result-value {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  #root {
+    padding: 1rem;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+  
+  .calculator-container h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .input-content {
+    padding: 2rem;
+  }
+  
+  .results-content {
+    padding: 2rem;
+  }
+  
+  .input-group {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .result-item.total-cost {
+    grid-column: 1;
+  }
+
+  .main-section {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-content {
+    padding: 1.5rem;
+  }
+  
+  .results-content {
+    padding: 1.5rem;
+  }
+  
+  .calculate-btn,
+  .reset-btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  .calculator-container h1 {
+    font-size: 1.75rem;
+  }
+}
