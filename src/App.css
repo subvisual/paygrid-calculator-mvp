@@ -48,7 +48,7 @@ body {
   overflow: hidden;
   position: relative;
   min-height: 500px;
-  max-width: 1100px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -179,7 +179,7 @@ body {
 
 .results-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -193,7 +193,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.05);
   transition: all 0.3s ease;
-  border-left: 4px solid #667eea;
+  /* border-left: 4px solid #667eea; */
   animation: slideUp 0.6s ease-out forwards;
   opacity: 0;
   transform: translateY(20px);
@@ -251,6 +251,88 @@ body {
   font-size: 1.1rem;
 }
 
+.cost-comparison {
+  margin-bottom: 2rem;
+}
+
+.comparison-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.comparison-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  border-left: 4px solid #667eea;
+  animation: slideUp 0.6s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  gap: 2rem;
+}
+
+.comparison-row .comparison-item:nth-child(1) { animation-delay: 0.1s; }
+.comparison-row .comparison-item:nth-child(2) { animation-delay: 0.2s; }
+.comparison-item.savings { animation-delay: 0.3s; }
+
+.comparison-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.comparison-item.savings {
+  background: white;
+  border-left: none;
+  font-weight: 600;
+}
+
+.comparison-item.savings .comparison-label {
+  color: #4a5568;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.comparison-item.savings .comparison-value {
+  color: #48bb78;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.comparison-label {
+  font-weight: 500;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.comparison-value {
+  font-weight: 700;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.comparison-item.clickable {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.comparison-item.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.comparison-item.clickable.active {
+  border-left: 4px solid #667eea;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.2);
+  background: #f8faff;
+}
+
 @media (max-width: 768px) {
   #root {
     padding: 1rem;
@@ -286,6 +368,11 @@ body {
 
   .main-section {
     min-height: auto;
+  }
+
+  .comparison-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 

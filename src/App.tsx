@@ -43,6 +43,7 @@ function App() {
   })
 
   const [results, setResults] = useState<CalculationResults | null>(null)
+  const [showWithPayGrid, setShowWithPayGrid] = useState(false)
 
   const handleInputChange = (field: keyof CalculationInputs, value: string) => {
     const numValue = parseFloat(value) || 0
@@ -192,50 +193,74 @@ function App() {
         ) : (
           <div className="results-content">
             <h2>Calculation Results</h2>
+            
+            <div className="cost-comparison">
+              <div className="comparison-row">
+                <div 
+                  className={`comparison-item clickable ${!showWithPayGrid ? 'active' : ''}`}
+                  onClick={() => setShowWithPayGrid(false)}
+                >
+                  <span className="comparison-label">Without PayGrid:</span>
+                  <span className="comparison-value">{formatNumber(results.totalAnnualCosts)}</span>
+                </div>
+                <div 
+                  className={`comparison-item clickable ${showWithPayGrid ? 'active' : ''}`}
+                  onClick={() => setShowWithPayGrid(true)}
+                >
+                  <span className="comparison-label">With PayGrid:</span>
+                  <span className="comparison-value">{formatNumber(results.totalAnnualCosts * 0.3)}</span>
+                </div>
+              </div>
+              <div className="comparison-item savings">
+                <span className="comparison-label">Savings:</span>
+                <span className="comparison-value">{formatNumber(results.totalAnnualCosts * 0.7)}</span>
+              </div>
+            </div>
+            
             <div className="results-grid">
               <div className="result-item">
                 <span className="result-label">Stablecoin Float Required:</span>
-                <span className="result-value">{formatNumber(results.stablecoinFloatRequired)}</span>
+                <span className="result-value">{formatNumber(showWithPayGrid ? results.stablecoinFloatRequired * 0.3 : results.stablecoinFloatRequired)}</span>
               </div>
 
               <div className="result-item">
                 <span className="result-label">Annual Capital Cost:</span>
-                <span className="result-value">{formatNumber(results.annualCapitalCost)}</span>
+                <span className="result-value">{formatNumber(showWithPayGrid ? results.annualCapitalCost * 0.3 : results.annualCapitalCost)}</span>
               </div>
 
               <div className="result-item">
                 <span className="result-label">Daily Conversion Volume:</span>
-                <span className="result-value">{formatNumber(results.dailyConversionVolume)}</span>
+                <span className="result-value">{formatNumber(showWithPayGrid ? results.dailyConversionVolume * 0.3 : results.dailyConversionVolume)}</span>
               </div>
 
               <div className="result-item">
                 <span className="result-label">Annual Conversion Volume:</span>
-                <span className="result-value">{formatNumber(results.annualConversionVolume)}</span>
+                <span className="result-value">{formatNumber(showWithPayGrid ? results.annualConversionVolume * 0.3 : results.annualConversionVolume)}</span>
               </div>
 
               <div className="result-item">
                 <span className="result-label">Annual Conversion Costs:</span>
-                <span className="result-value">{formatNumber(results.annualConversionCosts)}</span>
+                <span className="result-value">{formatNumber(showWithPayGrid ? results.annualConversionCosts * 0.3 : results.annualConversionCosts)}</span>
               </div>
 
               <div className="result-item">
                 <span className="result-label">Daily Borrowing Needed:</span>
-                <span className="result-value">{formatNumber(results.dailyBorrowingNeeded)}</span>
+                <span className="result-value">{formatNumber(showWithPayGrid ? results.dailyBorrowingNeeded * 0.3 : results.dailyBorrowingNeeded)}</span>
               </div>
 
               <div className="result-item">
                 <span className="result-label">Annual Borrowing Volume:</span>
-                <span className="result-value">{formatNumber(results.annualBorrowingVolume)}</span>
+                <span className="result-value">{formatNumber(showWithPayGrid ? results.annualBorrowingVolume * 0.3 : results.annualBorrowingVolume)}</span>
               </div>
 
               <div className="result-item">
                 <span className="result-label">Annual Borrowing Costs:</span>
-                <span className="result-value">{formatNumber(results.annualBorrowingCosts)}</span>
+                <span className="result-value">{formatNumber(showWithPayGrid ? results.annualBorrowingCosts * 0.3 : results.annualBorrowingCosts)}</span>
               </div>
 
               <div className="result-item total-cost">
                 <span className="result-label">Total Annual Costs:</span>
-                <span className="result-value">{formatNumber(results.totalAnnualCosts)}</span>
+                <span className="result-value">{formatNumber(showWithPayGrid ? results.totalAnnualCosts * 0.3 : results.totalAnnualCosts)}</span>
               </div>
             </div>
 
