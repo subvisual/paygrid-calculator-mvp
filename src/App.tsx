@@ -64,7 +64,7 @@ function App() {
       annualCapitalCost: dailyPaymentVolume * floatRequirementsDecimal * costOfCapitalDecimal,
       annualConversionVolume: dailyPaymentVolume * operationalDays,
       dailyConversionVolume: dailyPaymentVolume - internalNettingEfficiency,
-      annualConversionCosts: (dailyPaymentVolume - internalNettingEfficiency) * averageConversionCostBps * operationalDays / 10000,
+      annualConversionCosts: (dailyPaymentVolume - internalNettingEfficiency) * averageConversionCostBps * operationalDays / 10000, // Convert bps to decimal
       dailyBorrowingNeeded: dailyPaymentVolume * floatRequirementsDecimal,
       annualBorrowingVolume: dailyPaymentVolume * floatRequirementsDecimal * operationalDays,
       annualBorrowingCosts: (floatRequirementsDecimal * operationalDays) * averageConversionCostBps / 10000,
@@ -97,7 +97,7 @@ function App() {
 
   return (
     <div className="calculator-container">
-      <h1>PayGrid Calculator</h1>
+      <h1>Paygrid Calculator</h1>
 
       <div className={`main-section ${results ? 'show-results' : 'show-inputs'}`}>
         {!results ? (
@@ -192,15 +192,15 @@ function App() {
         ) : (
           <div className="results-content">
             <h2>Calculation Results</h2>
-            
+
             <div className="comparison-summary">
               <div className="comparison-row">
                 <div className="comparison-item">
-                  <span className="comparison-label">Without PayGrid:</span>
+                  <span className="comparison-label">Without Paygrid:</span>
                   <span className="comparison-value">{formatNumber(results.totalAnnualCosts)}</span>
                 </div>
                 <div className="comparison-item">
-                  <span className="comparison-label">With PayGrid:</span>
+                  <span className="comparison-label">With Paygrid:</span>
                   <span className="comparison-value">{formatNumber(results.totalAnnualCosts * 0.3)}</span>
                 </div>
               </div>
@@ -211,9 +211,9 @@ function App() {
                 </div>
               </div>
             </div>
-            
+
             <div className="results-table">
-              
+
               <div className="table-row">
                 <div className="table-cell metric-cell">Stablecoin Float Required</div>
                 <div className="table-cell value-cell">{formatNumber(results.stablecoinFloatRequired)}</div>
